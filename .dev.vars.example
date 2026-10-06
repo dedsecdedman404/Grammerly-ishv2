@@ -1,0 +1,8 @@
+# Copy this file to ".dev.vars" for local testing. NEVER commit .dev.vars.
+# In production, set these in the Cloudflare dashboard instead (see DEPLOY.md).
+
+SESSION_SECRET=replace-with-64-random-hex-characters
+USERS={"yourname":"paste-hash-from-scripts/hash-password.mjs"}
+UPSTREAM_URL=https://example.com/your-rewriting-api
+# UPSTREAM_KEY=only-if-your-provider-gives-you-one
+# MAX_CHARS=6000

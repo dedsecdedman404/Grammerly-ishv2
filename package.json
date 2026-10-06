@@ -1,0 +1,13 @@
+{
+  "name": "humaniser",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "test": "node --test test/api.test.mjs",
+    "hash": "node scripts/hash-password.mjs",
+    "dev": "wrangler pages dev public"
+  },
+  "devDependencies": {
+    "wrangler": "^4"
+  }
+}
