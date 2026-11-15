@@ -139,7 +139,9 @@ test('me and logout', async () => {
   const cookie = await loginCookie();
   const ok = await me({ request: new Request(ORIGIN + '/api/me', { headers: { Cookie: cookie } }), env });
   assert.equal(ok.status, 200);
-  assert.equal((await ok.json()).user, 'alice');
+  const meBody = await ok.json();
+  assert.equal(meBody.user, 'alice');
+  assert.equal(meBody.maxChars, 100);
   const anon = await me({ request: new Request(ORIGIN + '/api/me'), env });
   assert.equal(anon.status, 401);
   const out = await logout({ request: post('/api/logout', {}), env });

@@ -76,3 +76,18 @@ cp .dev.vars.example .dev.vars   # fill in the values
 npm run dev                      # http://localhost:8788
 npm test                         # automated checks
 ```
+
+---
+
+# Updating the live site (after the first deploy)
+
+Cloudflare Pages redeploys automatically whenever the GitHub repo changes (usually within a minute).
+
+1. In your repo on github.com, replace these with the new versions from the zip: everything inside `public/`, `functions/`, `test/`, and `package.json`.
+2. Delete the old `public/styles.css` (it's no longer used).
+3. Do NOT upload a `.dev.vars` file, and don't change your Cloudflare secrets. Nothing about them changed.
+4. Watch Workers & Pages -> your project -> Deployments. When the newest one says Success, open your site and hard-refresh (Ctrl+Shift+R or Cmd+Shift+R).
+
+Pages of the site:
+- `/` is the public landing page
+- `/app` is the login and the working tool

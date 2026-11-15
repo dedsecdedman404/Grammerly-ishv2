@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en-GB">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Grammerly-ish | Your writing</title>
+  <meta name="robots" content="noindex">
+  <meta name="theme-color" content="#2540f5">
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600..800&family=Instrument+Sans:wght@400..700&display=swap">
+  <link rel="stylesheet" href="/base.css">
+  <link rel="stylesheet" href="/app.css">
+</head>
+<body data-view="loading">
+  <a class="skip-link" href="#main">Skip to content</a>
+
+  <header class="site-header">
+    <div class="wrap">
+      <a class="brand" href="/" aria-label="Grammerly-ish home">
+        <svg class="brand-mark" viewBox="0 0 32 32" aria-hidden="true"><rect width="32" height="32" rx="9" fill="#2540f5"/><path d="M6 21.5c2.2-3.2 3.8-3.2 5.5 0s3.3 3.2 5.5 0 3.8-3.2 5.5 0 3.3 3.2 4.5 1.2" fill="none" stroke="#fff" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/><circle cx="22.5" cy="10" r="2.4" fill="#ffe14d"/></svg>
+        Grammerly-ish
+      </a>
+      <div class="account" id="account" hidden>
+        <span class="account-name" id="account-name"></span>
+        <button type="button" class="btn btn-ghost" id="logout-btn">Log out</button>
+      </div>
+    </div>
+  </header>
+
+  <main id="main">
+    <p class="boot-note" id="boot-note" role="status">Loading</p>
+
+    <!-- LOGIN -->
+    <section class="login" id="login-view" aria-labelledby="login-title">
+      <div class="login-card">
+        <h1 id="login-title">Log in</h1>
+        <p class="login-lead">Write with confidence. Don't think, we'll take care of the rest.</p>
+        <form id="login-form" novalidate>
+          <div class="field">
+            <label for="username-input">Username</label>
+            <input id="username-input" name="username" type="text" autocomplete="username" autocapitalize="none" spellcheck="false" required>
+          </div>
+          <div class="field">
+            <label for="password-input">Password</label>
+            <input id="password-input" name="password" type="password" autocomplete="current-password" required>
+          </div>
+          <p class="form-error" id="login-error" role="alert" hidden></p>
+          <button type="submit" class="btn btn-primary btn-lg login-submit" id="login-submit">Log in</button>
+        </form>
+        <p class="login-help">Invite-only. Ask the person who shared Grammerly-ish with you to set up an account.</p>
+      </div>
+    </section>
+
+    <!-- TOOL -->
+    <section class="tool wrap" id="tool-view" aria-labelledby="tool-title">
+      <div class="tool-head">
+        <h1 id="tool-title">Your writing</h1>
+        <p>Paste a draft, hit Humanise, then copy the result.</p>
+      </div>
+
+      <div class="panes">
+        <div class="pane">
+          <div class="pane-bar">
+            <label class="pane-title" for="input-text">Your draft</label>
+            <span class="counter" id="counter" aria-live="polite">0 / 0</span>
+          </div>
+          <textarea id="input-text" class="pane-body pane-input" placeholder="Paste or type your text here." spellcheck="true"></textarea>
+          <div class="pane-foot">
+            <button type="button" class="btn btn-ghost" id="sample-btn">Try sample text</button>
+            <button type="button" class="btn btn-ghost" id="clear-btn">Clear</button>
+          </div>
+        </div>
+
+        <div class="pane pane-result">
+          <div class="pane-bar">
+            <h2 class="pane-title">Polished text</h2>
+            <span class="counter" id="word-count"></span>
+          </div>
+          <div class="pane-body pane-output" id="output" aria-live="polite">
+            <p class="output-empty" id="output-empty">Your polished text will appear here.</p>
+            <div class="output-loading" id="output-loading" hidden aria-label="Working on it">
+              <span class="skeleton skeleton-1"></span>
+              <span class="skeleton skeleton-2"></span>
+              <span class="skeleton skeleton-3"></span>
+              <span class="skeleton skeleton-4"></span>
+            </div>
+            <p class="output-text" id="output-text" hidden></p>
+            <p class="output-error" id="output-error" role="alert" hidden></p>
+          </div>
+          <div class="pane-foot">
+            <button type="button" class="btn btn-ghost" id="copy-btn" disabled>Copy</button>
+            <a class="btn btn-outline btn-sm" id="recheck-btn" href="https://www.zerogpt.com" target="_blank" rel="noopener noreferrer" aria-disabled="true">Recheck your writing</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="run-row">
+        <button type="button" class="btn btn-primary btn-lg" id="humanise-btn" disabled>Humanise</button>
+        <p class="run-hint" id="run-hint">Tip: press Ctrl or Cmd + Enter in the draft box.</p>
+      </div>
+
+      <p class="recheck-note">Recheck copies your polished text and opens ZeroGPT in a new tab. Paste it there to compare. Checkers aren't perfect, so read the text over yourself too.</p>
+    </section>
+  </main>
+
+  <div class="toast" id="toast" role="status" aria-live="polite" hidden></div>
+
+  <script src="/app.js" defer></script>
+</body>
+</html>

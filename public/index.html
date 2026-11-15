@@ -1,135 +1,173 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en-GB">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Grammarly-ish | AI Text Humaniser</title>
-
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
-
-    <script src="https://cdn.tailwindcss.com"></script>
-
-    <link rel="stylesheet" href="styles.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Grammerly-ish | Write with confidence</title>
+  <meta name="description" content="Paste your draft and Grammerly-ish rewrites it in clear, natural UK English. Write with confidence. Don't think, we'll take care of the rest.">
+  <meta name="theme-color" content="#2540f5">
+  <meta property="og:title" content="Grammerly-ish | Write with confidence">
+  <meta property="og:description" content="Don't think, we'll take care of the rest.">
+  <meta property="og:type" content="website">
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600..800&family=Instrument+Sans:wght@400..700&display=swap">
+  <link rel="stylesheet" href="/base.css">
+  <link rel="stylesheet" href="/landing.css">
 </head>
-<body class="min-h-screen flex items-center justify-center p-4 md:p-8 transition-colors duration-500 selection-custom antialiased relative overflow-hidden">
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
 
-    <div class="absolute inset-0 bg-[#e2e8f0] z-0"></div>
-
-    <div id="login-screen" class="z-10 w-full max-w-sm transition-all duration-700 ease-in-out">
-        <div class="cyber-panel p-8 flex flex-col gap-6 relative overflow-hidden">
-            <div class="noise-overlay"></div>
-
-            <div class="relative z-10">
-                <div class="flex gap-2 mb-8">
-                    <div class="w-3 h-3 rounded-full bg-[#FF5F56] shadow-[0_0_8px_#FF5F5680]"></div>
-                    <div class="w-3 h-3 rounded-full bg-[#FFBD2E] shadow-[0_0_8px_#FFBD2E80]"></div>
-                    <div class="w-3 h-3 rounded-full bg-[#27C93F] shadow-[0_0_8px_#27C93F80]"></div>
-                </div>
-
-                <h1 class="text-xl font-medium text-slate-200 mb-6 font-mono">GRAMMARLY-ISH v1.0</h1>
-
-                <form id="login-form" class="space-y-4">
-                    <div>
-                        <input type="text" id="username-input" placeholder="Username" autocomplete="off"
-                            class="w-full bg-[#0f172a]/50 border border-slate-700 rounded-lg p-3 text-slate-200 font-mono text-sm outline-none focus:border-blue-500 focus:shadow-[0_0_15px_rgba(59,130,246,0.2)] transition-all placeholder:text-slate-500">
-                    </div>
-                    <div>
-                        <input type="password" id="password-input" placeholder="Password"
-                            class="w-full bg-[#0f172a]/50 border border-slate-700 rounded-lg p-3 text-slate-200 font-mono text-sm outline-none focus:border-blue-500 focus:shadow-[0_0_15px_rgba(59,130,246,0.2)] transition-all placeholder:text-slate-500">
-                        <p id="login-error" class="text-red-400 font-mono text-xs mt-2 hidden glow-red">ACCESS DENIED</p>
-                    </div>
-                    <button type="submit" class="w-full mt-4 bg-slate-800 hover:bg-slate-700 border border-slate-600 text-white font-mono text-sm py-3 rounded-lg transition-all active:scale-[0.98]">
-                        INITIALIZE
-                    </button>
-                </form>
-            </div>
-        </div>
+  <header class="site-header">
+    <div class="wrap">
+      <a class="brand" href="/" aria-label="Grammerly-ish home">
+        <svg class="brand-mark" viewBox="0 0 32 32" aria-hidden="true"><rect width="32" height="32" rx="9" fill="#2540f5"/><path d="M6 21.5c2.2-3.2 3.8-3.2 5.5 0s3.3 3.2 5.5 0 3.8-3.2 5.5 0 3.3 3.2 4.5 1.2" fill="none" stroke="#fff" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/><circle cx="22.5" cy="10" r="2.4" fill="#ffe14d"/></svg>
+        Grammerly-ish
+      </a>
+      <nav class="site-nav" aria-label="Main">
+        <a href="#how">How it works</a>
+        <a href="#why">Why Grammerly-ish</a>
+        <a href="#faq">FAQ</a>
+        <a class="btn btn-outline btn-sm" href="/app">Log in</a>
+      </nav>
     </div>
+  </header>
 
-    <div id="app-screen" class="z-10 w-full max-w-6xl hidden opacity-0 transition-all duration-1000 ease-in-out">
-
-        <div class="main-wrapper rounded-[2.5rem] p-3 md:p-4 shadow-[0_20px_50px_rgba(0,0,0,0.3),0_0_0_1px_rgba(255,255,255,0.1)]">
-
-            <div class="cyber-panel rounded-[2rem] w-full h-[750px] flex flex-col relative overflow-hidden">
-                <div class="noise-overlay"></div>
-
-                <div class="relative z-10 flex flex-col h-full p-6 md:p-8">
-
-                    <div class="flex justify-between items-center mb-8 border-b border-slate-800/80 pb-6">
-                        <div class="flex gap-2">
-                            <div class="w-3.5 h-3.5 rounded-full bg-[#FF5F56] shadow-[0_0_10px_rgba(255,95,86,0.4)]"></div>
-                            <div class="w-3.5 h-3.5 rounded-full bg-[#FFBD2E] shadow-[0_0_10px_rgba(255,189,46,0.4)]"></div>
-                            <div class="w-3.5 h-3.5 rounded-full bg-[#27C93F] shadow-[0_0_10px_rgba(39,201,63,0.4)]"></div>
-                        </div>
-
-                        <div class="font-mono text-[#27C93F] text-xs tracking-widest glow-green flex items-center gap-2">
-                            <span class="w-1.5 h-1.5 rounded-full bg-[#27C93F] animate-pulse"></span>
-                            CONNECTED_01
-                        </div>
-                    </div>
-
-                    <div class="grid grid-cols-1 lg:grid-cols-2 gap-6 flex-1 overflow-hidden">
-
-                        <div class="inner-card flex flex-col relative group h-full">
-                            <div class="absolute bottom-0 left-0 w-64 h-64 bg-blue-500/10 rounded-full blur-[80px] pointer-events-none group-hover:bg-blue-500/15 transition-all duration-700"></div>
-
-                            <div class="absolute top-6 left-6 flex flex-col gap-2 pointer-events-none opacity-20">
-                                <div class="h-2 w-24 bg-slate-400 rounded-full"></div>
-                                <div class="h-2 w-48 bg-slate-400 rounded-full"></div>
-                            </div>
-
-                            <textarea id="input-text" placeholder="Awaiting synthetic data input..."
-                                class="flex-1 w-full bg-transparent text-slate-300 font-sans text-base leading-relaxed p-6 pt-16 outline-none resize-none placeholder:text-slate-600 z-10 custom-scrollbar"></textarea>
-                        </div>
-
-                        <div class="inner-card flex flex-col relative h-full">
-
-                            <div class="absolute top-4 right-4 z-20">
-                                <button id="copy-btn" disabled class="flex items-center gap-2 px-3 py-1.5 rounded-md bg-slate-800/80 hover:bg-slate-700 text-slate-400 hover:text-white border border-slate-700/50 backdrop-blur-sm transition-all duration-300 opacity-0 disabled:hidden">
-                                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>
-                                    <span class="font-mono text-xs">COPY</span>
-                                </button>
-                            </div>
-
-                            <div id="loader-container" class="absolute inset-0 flex items-center justify-center z-10 hidden bg-[#0a0f1c]/50 backdrop-blur-sm">
-                                <div class="relative flex items-center justify-center">
-                                    <svg class="w-24 h-24 transform -rotate-90" viewBox="0 0 100 100">
-                                        <circle cx="50" cy="50" r="40" fill="none" stroke="#1e293b" stroke-width="4"></circle>
-                                        <circle class="animate-progress glow-pink" cx="50" cy="50" r="40" fill="none" stroke="#f43f5e" stroke-width="4" stroke-dasharray="251.2" stroke-dashoffset="180"></circle>
-                                    </svg>
-                                    <span class="absolute font-mono text-[10px] text-pink-500 tracking-widest animate-pulse">SYNC</span>
-                                </div>
-                            </div>
-
-                            <div class="flex-1 p-6 pt-16 overflow-y-auto custom-scrollbar z-10 relative min-h-0">
-                                <p id="output-placeholder" class="text-slate-600 font-mono text-sm text-center mt-20 opacity-50">
-                                    > System standby.<br>> Output stream will render here.
-                                </p>
-                                <p id="output-text" class="text-slate-300 font-sans text-base leading-relaxed whitespace-pre-wrap hidden"></p>
-                                <p id="api-error" class="text-red-400 font-mono text-sm mt-4 hidden glow-red"></p>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="mt-6 flex justify-between items-end">
-                        <button id="humanise-btn" class="cyber-button font-mono text-sm text-white px-8 py-3 rounded-lg flex items-center gap-2 opacity-50 cursor-not-allowed transition-all duration-300">
-                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"></path><polyline points="3.27 6.96 12 12.01 20.73 6.96"></polyline><line x1="12" y1="22.08" x2="12" y2="12"></line></svg>
-                            EXECUTE // HUMANISE
-                        </button>
-
-                        <div class="flex items-center gap-2 font-mono text-[10px] text-slate-500">
-                            <span class="w-1.5 h-1.5 rounded-full bg-red-500 shadow-[0_0_5px_#ef4444] animate-pulse"></span>
-                            PWR
-                        </div>
-                    </div>
-
-                </div>
-            </div>
+  <main id="main">
+    <section class="hero">
+      <div class="wrap hero-grid">
+        <div>
+          <h1 class="hero-title">
+            Write with confidence.
+            <span class="hero-title-soft">Don't think, we'll take care of the rest.</span>
+          </h1>
+          <p class="hero-sub">Paste your draft. Grammerly-ish rewrites it in clear, natural UK English, so it reads the way you'd say it.</p>
+          <div class="hero-actions">
+            <a class="btn btn-primary btn-lg" href="/app">Start writing</a>
+            <a class="btn btn-outline btn-lg" href="#how">See how it works</a>
+          </div>
+          <p class="hero-fineprint">Invite-only for now. Log in with the account you were given.</p>
         </div>
-    </div>
 
-    <script src="app.js"></script>
+        <figure class="demo" aria-label="Example: a stiff draft, and the same text after Grammerly-ish">
+          <div class="demo-pane demo-before">
+            <p class="demo-label">Your draft</p>
+            <p class="demo-text"><span class="flag">Furthermore, it is important to note that</span> social media has <span class="flag">significantly impacted the way</span> students communicate, and it <span class="flag">plays a crucial role in shaping</span> modern education.</p>
+          </div>
+          <div class="demo-pane demo-after">
+            <p class="demo-label">After Grammerly-ish</p>
+            <p class="demo-text">Social media has <mark>changed how students talk to each other</mark>, and it now <mark>shapes the way they learn</mark> too.</p>
+          </div>
+        </figure>
+      </div>
+    </section>
+
+    <section class="band band-wash" id="how">
+      <div class="wrap">
+        <h2 class="band-title">Three steps. No settings to fiddle with.</h2>
+        <ol class="steps">
+          <li class="step">
+            <p class="step-num" aria-hidden="true">1</p>
+            <h3>Paste your draft</h3>
+            <p>Drop in a paragraph or a section. A live counter shows how much room you have left.</p>
+          </li>
+          <li class="step">
+            <p class="step-num" aria-hidden="true">2</p>
+            <h3>Hit Humanise</h3>
+            <p>Stiff, repetitive phrasing is rewritten into natural wording. It takes a few moments.</p>
+          </li>
+          <li class="step">
+            <p class="step-num" aria-hidden="true">3</p>
+            <h3>Recheck your writing</h3>
+            <p>One click copies the result and opens <a href="https://www.zerogpt.com" target="_blank" rel="noopener noreferrer">ZeroGPT</a> so you can compare for yourself.</p>
+          </li>
+        </ol>
+      </div>
+    </section>
+
+    <section class="band" id="why">
+      <div class="wrap features">
+        <div class="features-intro">
+          <h2 class="band-title">Made for the way students write.</h2>
+          <p class="band-lead">Deadlines, word counts and a draft that sounds like a textbook. Grammerly-ish is built for that moment.</p>
+        </div>
+        <dl class="feature-list">
+          <div class="feature">
+            <dt>Natural phrasing</dt>
+            <dd>Replaces stock openers and repeated sentence shapes with wording that sounds like a person wrote it.</dd>
+          </div>
+          <div class="feature">
+            <dt>UK English by default</dt>
+            <dd>Spelling and phrasing are set for UK coursework, so you aren't fixing "color" and "organize" afterwards.</dd>
+          </div>
+          <div class="feature">
+            <dt>Nothing saved</dt>
+            <dd>There's no history and no drafts folder. Close the tab and your text is gone from the page.</dd>
+          </div>
+          <div class="feature">
+            <dt>You stay in charge</dt>
+            <dd>Read the result, change what you like, and make sure it still says what you mean before you hand it in.</dd>
+          </div>
+        </dl>
+      </div>
+    </section>
+
+    <section class="band band-wash" id="faq">
+      <div class="wrap">
+        <h2 class="band-title">Questions, answered.</h2>
+        <div class="faq">
+          <details>
+            <summary>What does Grammerly-ish do?</summary>
+            <p>It takes text you've written and rewrites it in a clearer, more natural voice. It works on one passage at a time, and you copy the result out when you're happy with it.</p>
+          </details>
+          <details>
+            <summary>How do I get an account?</summary>
+            <p>Grammerly-ish is invite-only for now. Ask the person who shared the link with you to set up a login.</p>
+          </details>
+          <details>
+            <summary>Is my text saved?</summary>
+            <p>Grammerly-ish doesn't keep a history of what you paste or what comes back. To do the rewrite, your text is sent to a third-party rewriting service, so don't paste anything private or confidential.</p>
+          </details>
+          <details>
+            <summary>Will the result pass an AI checker?</summary>
+            <p>No tool can promise that. AI checkers disagree with each other and get things wrong, including on writing that was never touched by AI. That's why the Recheck button is there: see what a checker says, and edit the text yourself if something doesn't sound like you.</p>
+          </details>
+          <details>
+            <summary>Can I use it for coursework?</summary>
+            <p>Rules on AI writing tools differ between schools and even between modules. Check your institution's policy before you submit anything. You're responsible for what you hand in.</p>
+          </details>
+          <details>
+            <summary>Why is there a text limit?</summary>
+            <p>Each rewrite handles a limited amount of text. The app shows your limit as you type. For a longer essay, work through it one section at a time.</p>
+          </details>
+        </div>
+      </div>
+    </section>
+
+    <section class="closer">
+      <div class="wrap">
+        <div>
+          <h2>Write with confidence.</h2>
+          <p>Don't think, we'll take care of the rest.</p>
+        </div>
+        <a class="btn btn-light btn-lg" href="/app">Log in to start</a>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="wrap">
+      <div>
+        <a class="brand" href="/">Grammerly-ish</a>
+        <p class="footer-note">Grammerly-ish is an independent project. It isn't affiliated with Grammarly or ZeroGPT.</p>
+      </div>
+      <ul class="footer-links">
+        <li><a href="#how">How it works</a></li>
+        <li><a href="#faq">FAQ</a></li>
+        <li><a href="/app">Log in</a></li>
+      </ul>
+    </div>
+  </footer>
 </body>
 </html>

@@ -1,8 +1,8 @@
 import { currentUser } from '../_lib/auth.js';
 import { isSameOrigin, json, readJson } from '../_lib/http.js';
+import { getMaxChars } from '../_lib/config.js';
 import { buildRequest, extractText } from '../_lib/upstream.js';
 
-const DEFAULT_MAX_CHARS = 6000;
 const UPSTREAM_TIMEOUT_MS = 55000;
 
 export async function onRequestPost({ request, env }) {
@@ -14,7 +14,7 @@ export async function onRequestPost({ request, env }) {
 
   if (!env.UPSTREAM_URL) return json({ error: 'NOT_CONFIGURED' }, 500);
 
-  const maxChars = Number(env.MAX_CHARS) || DEFAULT_MAX_CHARS;
+  const maxChars = getMaxChars(env);
   const body = await readJson(request, maxChars * 4 + 1024); // *4 allows multi-byte characters
   const text = typeof body?.text === 'string' ? body.text.trim() : '';
   if (!text) return json({ error: 'EMPTY_TEXT' }, 400);
